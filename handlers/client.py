@@ -2,7 +2,7 @@ from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
 from keyboards.client_kb import start_markup
-
+from database.bot_db import sql_command_random
 # async def pin_command(message: types.Message):
 #     if message.reply_to_message:
 #         await bot.pin_chat_message(message.chat.id, message.reply_to_message.from_user.id)
@@ -47,6 +47,9 @@ async def quiz_1(message: types.Message):
         open_period=10,
         reply_markup=markup
     )
+async def get_random_user(message: types.Message):
+    await sql_command_random(message)
+
 
 
 def register_handler_client(dp: Dispatcher):
@@ -55,4 +58,5 @@ def register_handler_client(dp: Dispatcher):
     dp.register_message_handler(quiz_1, commands=['test'])
     dp.register_message_handler(mem_command, commands=['mem'])
     dp.register_message_handler(help_command, commands=['help'])
+    dp.register_message_handler(get_random_user, commands=['get'])
 
