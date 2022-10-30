@@ -1,11 +1,14 @@
+
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
 from keyboards.client_kb import start_markup
 from database.bot_db import sql_command_random
-# async def pin_command(message: types.Message):
-#     if message.reply_to_message:
-#         await bot.pin_chat_message(message.chat.id, message.reply_to_message.from_user.id)
+from parser.shop import get_data
+
+async def pin_command(message: types.Message):
+    if message.reply_to_message:
+        await bot.pin_chat_message(message.chat.id, message.reply_to_message.from_user.id)
 # @dp.message_handler(commands=['start', 'info'])
 
 async def start_command(message: types.Message):
@@ -50,13 +53,21 @@ async def quiz_1(message: types.Message):
 async def get_random_user(message: types.Message):
     await sql_command_random(message)
 
+async def parser_shop(message: types.Message):
+    items = get_data()
+    for item in items:
+        await message.answer(
+            f'{item["link"]}\n\n'
+            f'{item["title"]}\n'
+            f'{item["info"]}'
+        )
 
 
 def register_handler_client(dp: Dispatcher):
-    # dp.register_message_handler(pin_command, commands=['pin'], commands_prefix='!/')
+    dp.register_message_handler(pin_command, commands=['pin'], commands_prefix='!/')
     dp.register_message_handler(start_command, commands=['start', 'info'])
     dp.register_message_handler(quiz_1, commands=['test'])
     dp.register_message_handler(mem_command, commands=['mem'])
     dp.register_message_handler(help_command, commands=['help'])
     dp.register_message_handler(get_random_user, commands=['get'])
-
+    dp.register_message_handler(parser_shop, commands=['shop'])

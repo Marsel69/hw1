@@ -9,7 +9,8 @@ help_button = KeyboardButton("/help")
 test_button = KeyboardButton("/test")
 mem_button = KeyboardButton("/mem")
 register_button = KeyboardButton("/register")
-start_markup.add(start_button, help_button, test_button, mem_button, register_button)
+shop_button = KeyboardButton("/shop")
+start_markup.add(start_button, help_button, test_button, mem_button, register_button, shop_button)
 
 cancel_markup = ReplyKeyboardMarkup(
     resize_keyboard=True,
