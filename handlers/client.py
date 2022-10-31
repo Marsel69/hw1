@@ -8,7 +8,7 @@ from parser.shop import get_data
 
 async def pin_command(message: types.Message):
     if message.reply_to_message:
-        await bot.pin_chat_message(message.chat.id, message.reply_to_message.from_user.id)
+        await bot.pin_chat_message(message.chat.id, message.reply_to_message.message_id)
 # @dp.message_handler(commands=['start', 'info'])
 
 async def start_command(message: types.Message):

@@ -1,7 +1,7 @@
 from aiogram import types, Dispatcher
 from config import bot, dp, ADMINS
 from database.bot_db import sql_command_all
-from aiogram.types import InlineKeyboardButton,InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 async def delete_data(message: types.Message):
     if message.from_user.id not in ADMINS:
